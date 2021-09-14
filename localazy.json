@@ -1,0 +1,26 @@
+{
+
+    "writeKey": "YOUR-WRITE-KEY",
+    "readKey": "YOUR-READ-KEY",
+    
+    "upload": {
+      "type": "json",
+      "files": [
+          {
+              "pattern": "src/locales/en.json",
+              "lang": "inherited",
+              "path": "${path}"
+          },
+          {
+              "group": "existing",
+              "pattern": "src/locales/*.json",
+              "excludes": ["src/locales/en.json"],
+              "lang": "${autodetectLang}",
+              "path": "${path}"
+          }
+      ]       
+    },
+    "download": {
+        "files": "${path}/${lang}.json"
+    }
+  }

@@ -1,0 +1,49 @@
+on: [push]
+
+jobs:
+  release_tags:
+    runs-on: ubuntu-latest
+    name: Complex overview of tags management
+    steps:
+      - uses: actions/checkout@v1
+      - name: List tags
+        uses: localazy/tag@v1
+        with:
+          list: true
+      - name: Publish new-tag
+        uses: localazy/tag@v1
+        with:
+          publish: 'new-tag'
+      - name: Publish new-tag-2
+        uses: localazy/tag@v1   
+        with:
+          publish: 'new-tag-2'
+      - name: Promote new-tag
+        uses: localazy/tag@v1   
+        with:
+          promote_from: 'new-tag'
+          promote_to: 'new-tag-2'
+      - name: Rename new-tag
+        uses: localazy/tag@v1   
+        with:
+          rename_from: 'new-tag'
+          rename_to: 'renamed-tag'
+      - name: Merge tag
+        uses: localazy/tag@v1   
+        with:
+          merge_from: 'renamed-tag'
+          merge_to: 'new-tag-2'
+          merge_output: 'merged-tag'
+          merge_parameters: '--add-languages'
+      - name: Delete renamed-tag
+        uses: localazy/tag@v1   
+        with:
+          delete: 'renamed-tag'
+      - name: Delete merged-tag
+        uses: localazy/tag@v1   
+        with:
+          delete: 'merged-tag'
+      - name: Delete new-tag-2
+        uses: localazy/tag@v1   
+        with:
+          delete: 'new-tag-2'
